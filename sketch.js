@@ -11,7 +11,7 @@ let gen = 0;
 async function setup() {
   // p5.js 2.0: Load the background image using await instead of preload.
   // Ensure your image file is named 'background.jpg' and is in the same folder.
-  img = await loadImage("background.png");
+  img = await loadImage("backgrounds.png");
 
   // Create canvas matching the image aspect ratio (approximate based on your upload)
   cnv = createCanvas(1024, 512);
