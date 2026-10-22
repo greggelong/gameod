@@ -77,6 +77,14 @@ async function setup() {
   restartBtn.style("position", "absolute");
   restartBtn.style("z-index", "3"); // above the canvas
   restartBtn.mousePressed(restartSimulation);
+  //restartBtn.style("opacity", "0");
+  restartBtn.style("transition", "opacity 0.4s ease");
+  //restartBtn.style("background", "transparent");
+  restartBtn.style("border", "1px solid #fff");
+  restartBtn.style("color", "#0e0404");
+
+  restartBtn.mouseOver(() => restartBtn.style("opacity", "1"));
+  restartBtn.mouseOut(() => restartBtn.style("opacity", "0"));
 
   // -----------------------------------------------------------------
   // Full-page background + scrolling text layer
@@ -135,8 +143,8 @@ function draw() {
   // 2. Draw living cells
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      let x = i * resolutionX + 120;
-      let y = j * resolutionY;
+      let x = i * resolutionX + 150;
+      let y = j * resolutionY + resolutionY;
       if (grid[i][j] == 1) {
         fill(0, 200);
         noStroke();
