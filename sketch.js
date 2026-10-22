@@ -1,8 +1,9 @@
 let grid;
-let cols = 20;
-let rows = 5;
+let cols = 40;
+let rows = 10;
 let resolutionX, resolutionY;
 let img;
+let cnv;
 
 // Generation counter so you can confirm the simulation is actually stepping
 let gen = 0;
@@ -13,7 +14,10 @@ async function setup() {
   img = await loadImage("background.png");
 
   // Create canvas matching the image aspect ratio (approximate based on your upload)
-  createCanvas(1024, 512);
+  cnv = createCanvas(1024, 512);
+  let cnx = (windowWidth - width) / 2;
+  let cny = (windowHeight - height) / 2;
+  cnv.position(cnx, cny);
 
   // -----------------------------------------------------------------
   // OPTION B: If you want a *bigger* board for richer Life behaviour,
@@ -24,8 +28,10 @@ async function setup() {
   // -----------------------------------------------------------------
 
   // Calculate cell size based on canvas dimensions
-  resolutionX = (width - 220) / cols;
-  resolutionY = (height - 120) / rows;
+  //resolutionX = (width - 220) / cols;
+  //resolutionY = (height - 120) / rows;
+  resolutionX = 20;
+  resolutionY = 40;
 
   // -----------------------------------------------------------------
   // OPTION A: Seed a glider instead of random noise.
@@ -67,15 +73,16 @@ function draw() {
   // 2. Draw the Game of Life
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      let x = i * resolutionX;
+      let x = i * resolutionX + 120; // offset for image
       let y = j * resolutionY;
 
       if (grid[i][j] == 1) {
         // Style for living cells
         fill(0, 200); // Black with slight transparency to see the ground
-        stroke(255); // White outline for contrast
-        strokeWeight(2);
-        rect(x, y, resolutionX, resolutionY);
+        //stroke(255); // White outline for contrast
+        //strokeWeight(2);
+        noStroke();
+        rect(x, y, resolutionX - 2, resolutionY - 2);
       }
     }
   }
